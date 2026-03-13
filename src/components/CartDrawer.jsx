@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 
 export default function CartDrawer({ cart, isOpen, closeCart, removeFromCart, clearCart }) {
+    const navigate = useNavigate()
 
     const total = cart.reduce((acc, item) => acc + item.price, 0)
 
@@ -51,7 +53,9 @@ export default function CartDrawer({ cart, isOpen, closeCart, removeFromCart, cl
                 </div>
                 <div className="p-4 border-t">
                     <p className="font-bold">Total: ${total.toFixed(2)}</p>
-                    <button className="w-full mt-3 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+                    <button 
+                    onClick={() => { closeCart(); navigate("/checkout")}}
+                    className="w-full mt-3 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
                         Finalizar compra
                     </button>
 
