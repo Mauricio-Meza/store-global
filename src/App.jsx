@@ -21,7 +21,6 @@ import SkeletonCard from "./components/SkeletonCard"
 
 export default function App() {
   const [isCartOpen, setCartOpen] = useState(false)
-  const [cart, setCart] = useState([])
   const [activeCategory, setActiveCategory] = useState("Todos")
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedProduct, setSelectedProduct] = useState(null)
@@ -32,6 +31,10 @@ export default function App() {
 
   const navigate = useNavigate()
 
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem('cart')
+    return savedCart ? JSON.parse(savedCart) : []
+  })
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -41,15 +44,22 @@ export default function App() {
     return () => unsubscribe()
   }, [])
 
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
+
   const removeFromCart = (index) => {
-      setCart(prevCart => prevCart.map((item, i) =>
-        i === index
-            ? {...item, quantity: item.quantity - 1 } 
-            : item
-        ).filter(item => item.quantity > 0))
+    setCart(prevCart => prevCart.map((item, i) =>
+      i === index
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    ).filter(item => item.quantity > 0))
   }
 
-  const clearCart = () => setCart([])
+  const clearCart = () => {
+    setCart([])
+    localStorage.removeItem('cart')
+  }
 
   const [favorites, setFavorites] = useState(() => {
     const savedFavorites = localStorage.getItem('favorites')
