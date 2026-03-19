@@ -38,24 +38,28 @@ export default function CartDrawer({ cart, isOpen, closeCart, removeFromCart, cl
                             <img src={item.thumbnail} alt={item.title} className="w-12 h-12 object-cover rounded" />
                             <div className="flex-1">
                                 <p className="font-semibold text-sm">{item.title}</p>
-                                <p className="text-gray-600 text-sm">${item.price}</p>
+                                <p className="text-gray-600 text-sm">${(item.price * item.quantity).toFixed(2)}</p>
                             </div>
-                            <button
-                                onClick={() => removeFromCart(index)}
-                                className="text-red-400 hover:text-red-600 transition text-lg"
-                            >
-                                🗑️
-                            </button>
+                            <div className="flex items-center gap-2">
+                                <span className="text-sm fot-medium">x{item.quantity}</span>
+                                <button
+                                    onClick={() => removeFromCart(index)}
+                                    className="text-red-400 hover:text-red-600 transition text-lg"
+                                >
+                                    🗑️
+                                </button>
+                            </div>
                         </div>
                     ))}
+
 
 
                 </div>
                 <div className="p-4 border-t">
                     <p className="font-bold">Total: ${total.toFixed(2)}</p>
-                    <button 
-                    onClick={() => { closeCart(); navigate("/checkout")}}
-                    className="w-full mt-3 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+                    <button
+                        onClick={() => { closeCart(); navigate("/checkout") }}
+                        className="w-full mt-3 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
                         Finalizar compra
                     </button>
 

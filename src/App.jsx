@@ -42,7 +42,11 @@ export default function App() {
   }, [])
 
   const removeFromCart = (index) => {
-    setCart(prevCart => prevCart.filter((_, i) => i !== index))
+      setCart(prevCart => prevCart.map((item, i) =>
+        i === index
+            ? {...item, quantity: item.quantity - 1 } 
+            : item
+        ).filter(item => item.quantity > 0))
   }
 
   const clearCart = () => setCart([])
@@ -73,7 +77,17 @@ export default function App() {
       navigate("/login")
       return
     }
-    setCart(prevCart => [...prevCart, product])
+    setCart(prevCart => {
+      const exists = prevCart.find(item => item.id === product.id)
+      if (exists) {
+        return prevCart.map(item =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      }
+      return [...prevCart, { ...product, quantity: 1 }]
+    })
   };
 
   if (loadingAuth) return (
@@ -87,8 +101,8 @@ export default function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/checkout" element={<Checkout cart={cart} clearCart={clearCart} />} />
-      <Route path="/confirmation" element={<Confirmation />}/>
-      <Route path="*" element={<NotFound />}/>
+      <Route path="/confirmation" element={<Confirmation />} />
+      <Route path="*" element={<NotFound />} />
       <Route path="/" element={
         <div className="min-h-screen bg-gray-200 ">
           <NavBar
@@ -125,15 +139,15 @@ export default function App() {
             removeFromCart={removeFromCart}
             clearCart={clearCart}
           />
-          
+
           {isFavoriteOpen && (
             <FavoriteModal
-               favorites={favorites}
-               onClose={() => setFavoriteOpen(false)}
-               addToCart={addToCart}
+              favorites={favorites}
+              onClose={() => setFavoriteOpen(false)}
+              addToCart={addToCart}
             />
           )}
-          
+
 
           <ProductDetail
             product={selectedProduct}
