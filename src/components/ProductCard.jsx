@@ -4,7 +4,7 @@ export default function ProductCard({ product, addToCart, onProductClick, favori
     const isFavorite = favorites?.some(p => p.id === product.id)
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg relative transition"
+        <div className="bg-white  rounded-lg shadow-md p-4 hover:shadow-lg relative transition flex flex-col"
             onClick={() => onProductClick(product)}>
 
             <button
@@ -23,21 +23,22 @@ export default function ProductCard({ product, addToCart, onProductClick, favori
                 width="200"
                 className="w-full h-48 object-cover rounded"
             />
+            <div className="flex flex-col flex-1 mt-2">
+                <h2 className="text-base font-semibold line-clamp-2 leading-snug">
+                    {product.title}
+                </h2>
 
-            <h2 className="text-lg font-semibold mt-2">
-                {product.title}
-            </h2>
+                <p className="text-gray-600">
+                    ${product.price}
+                </p>
 
-            <p className="text-gray-600">
-                ${product.price}
-            </p>
-
-            <button
-                onClick={(e) => { e.stopPropagation(); addToCart(product) }}
-                className="w-full mt-3 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-            >
-                Agregar al carrito
-            </button>
+                <button
+                    onClick={(e) => { e.stopPropagation(); addToCart(product) }}
+                    className="w-full mt-auto pt-3 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+                >
+                    Agregar al carrito
+                </button>
+            </div>
         </div>
     )
 }
