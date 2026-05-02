@@ -1,16 +1,34 @@
-# React + Vite
+# Store Global 🛒
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🎯 Objetivo
+Desarrollar una aplicación e-commerce funcional que permita
+consumir una API REST, gestionar un carrito de compras y una
+lista de favoritos, con filtrado y búsqueda de productos.
 
-Currently, two official plugins are available:
+## ✨ Funcionalidades
+- 🛍️ Catálogo de productos consumidos desde API REST(DummyJSON)
+- 🛒 Carrito de compras(agregar productos, eliminar, actualizar cantidad)
+- ❤️ Lista de favoritos
+- 🔍 Filtrado y búsqueda de productos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tecnologías
+- React
+- JavaScript
+- Tailwind CSS
 
-## React Compiler
+## 🌐 API
+Los productos se obtienen desde [DummyJSON](https://dummyjson.com/),
+una API REST pública que simula un e-commerce real.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Demo
+https://store-global.vercel.app/
 
-## Expanding the ESLint configuration
+## 📦 Instalación
+```bash
+git clone https://github.com/Mauricio-Meza/store-global.git
+cd store-global
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
