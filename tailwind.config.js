@@ -12,7 +12,7 @@ export default {
     },
   },
   plugins: [
-    require('taiwind-scrollbar-hide')
+    require('tailwind-scrollbar-hide')
   ],
 }
 
